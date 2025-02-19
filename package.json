@@ -1,0 +1,16 @@
+{
+  "name": "praticando",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "less": "lessc ./src/styles/main.less ./build/styles/main.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "less": "^4.2.2"
+  }
+}
