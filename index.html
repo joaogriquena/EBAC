@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Github</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img id="avatar" class="profile-avatar" src="https://via.placeholder.com/180x180" alt=".">
+            <h1 id="name" class="profile-name"></h1>
+            <h2 id="username" class="profile-username"></h2>
+            <ul class="numbers">
+                <li class="numbers-item">
+                    <h4>Repositórios</h4>
+                    <span id="repos"></span>
+                </li>
+                <li class="numbers-item">
+                    <h4>Seguidores</h4>
+                    <span id="followers"></span>
+                </li>
+                <li class="numbers-item">
+                    <h4>Seguindo</h4>
+                    <span id="following"></span>
+                </li>
+            </ul>
+            <a href="#" id="link" class="profile-link">Ver no Github</a>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Seletores de elementos da interface
+            const avatar = document.querySelector('#avatar');
+            const name = document.querySelector('#name');
+            const username = document.querySelector('#username');
+            const repos = document.querySelector('#repos');
+            const followers = document.querySelector('#followers');
+            const following = document.querySelector('#following');
+            const link = document.querySelector('#link');
+
+            // Endpoint da API pública do GitHub com seu usuário
+            fetch('https://api.github.com/users/joaogriquena')
+                .then(response => response.json())  // Converte resposta para JSON
+                .then(data => {
+                    // Atualiza os elementos HTML com os dados da API
+                    avatar.src = data.avatar_url;
+                    name.textContent = data.name || "Nome não informado";
+                    username.textContent = "@" + data.login;
+                    repos.textContent = data.public_repos;
+                    followers.textContent = data.followers;
+                    following.textContent = data.following;
+                    link.href = data.html_url;
+                })
+                .catch(error => {
+                    console.error("Erro ao carregar perfil:", error);
+                    name.textContent = "Erro ao carregar perfil";
+                });
+        });
+    </script>
+
+</body>
+
+</html>
